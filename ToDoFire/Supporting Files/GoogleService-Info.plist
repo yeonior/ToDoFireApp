@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>495533983874-3hmn7gunn3053lik6ag8oi3f6i832g2r.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.495533983874-3hmn7gunn3053lik6ag8oi3f6i832g2r</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAxYvH4T-pMQUrjs4yz1-hsdr_WZqVbGmA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>495533983874</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>YeoCompany.ToDoFire</string>
+	<key>PROJECT_ID</key>
+	<string>todofire-ed4df</string>
+	<key>STORAGE_BUCKET</key>
+	<string>todofire-ed4df.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:495533983874:ios:f5fd556e511489a9d68c9b</string>
+</dict>
+</plist>
