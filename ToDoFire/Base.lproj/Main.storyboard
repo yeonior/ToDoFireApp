@@ -71,7 +71,6 @@
                                                         </state>
                                                         <connections>
                                                             <action selector="loginTapped:" destination="3cy-a2-xjY" eventType="touchUpInside" id="C6E-nN-a6k"/>
-                                                            <segue destination="dgO-Pg-15o" kind="presentation" id="rw4-3i-wvp"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JJC-bE-FHk">
@@ -114,7 +113,6 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
-                        <viewLayoutGuide key="safeArea" id="geH-ja-XeG"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="V2H-Ig-SxO" firstAttribute="trailing" secondItem="mnW-HS-1wx" secondAttribute="trailing" id="Nfp-la-gk9"/>
@@ -131,6 +129,7 @@
                         <outlet property="passwordTextField" destination="q7H-OL-Sba" id="CaK-1u-tIx"/>
                         <outlet property="scrollView" destination="V2H-Ig-SxO" id="eVx-uB-1ka"/>
                         <outlet property="warningLabel" destination="jkc-02-eH6" id="Ruy-nq-TSq"/>
+                        <segue destination="dgO-Pg-15o" kind="presentation" identifier="tasksSegue" id="4r0-qt-Mi5"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6aI-2n-8ev" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -171,6 +170,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tasks" id="pQ8-KR-Wdb">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="j1b-UO-in6">
+                            <connections>
+                                <action selector="signOutTapped:" destination="XD1-0v-p5n" id="jT2-Ti-AMz"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="dfh-al-lOU">
                             <connections>
                                 <action selector="addTapped:" destination="XD1-0v-p5n" id="xLM-F0-aCU"/>

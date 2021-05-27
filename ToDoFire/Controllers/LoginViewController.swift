@@ -6,8 +6,11 @@
 //
 
 import UIKit
+import Firebase
 
 class LoginViewController: UIViewController {
+    
+    let segueIdentifier = "tasksSegue"
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet weak var warningLabel: UILabel!
@@ -18,15 +21,29 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        warningLabel.isHidden = true
+        warningLabel.alpha = 0
         loginButton.layer.cornerRadius = 20
         
-        
+        // keyboard adjusting
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
+        Auth.auth().addStateDidChangeListener { [weak self] auth, user in
+            if user != nil {
+                self?.performSegue(withIdentifier: self!.segueIdentifier, sender: nil)
+            }
+        }
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        emailTextField.text = ""
+        passwordTextField.text = ""
+    }
+    
+    // keyboard adjusting
     @objc func adjustForKeyboard(notification: Notification) {
         guard let keyboardValue = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? NSValue else { return }
 
@@ -41,11 +58,55 @@ class LoginViewController: UIViewController {
 
         scrollView.scrollIndicatorInsets = scrollView.contentInset
     }
+    
+    // MARK: - Authentification
+    
+    func displayWarningLabel(withText text: String) {
+        warningLabel.text = text
+        
+        UIView.animate(withDuration: 3, delay: 0, usingSpringWithDamping: 1,
+                       initialSpringVelocity: 1, options: .curveEaseInOut) { [weak self] in
+            self?.warningLabel.alpha = 1
+        } completion: { [weak self] complete in
+            self?.warningLabel.alpha = 0
+        }
+    }
 
     @IBAction func loginTapped(_ sender: UIButton) {
+        guard let email = emailTextField.text, let password = passwordTextField.text, email != "", password != "" else {
+            displayWarningLabel(withText: "Info is incorrect")
+            return
+        }
+        
+        Auth.auth().signIn(withEmail: email, password: password) { [weak self] user, error in
+            if error != nil {
+                self?.displayWarningLabel(withText: "Error occurred")
+            }
+            
+            if user != nil {
+                self?.performSegue(withIdentifier: self!.segueIdentifier, sender: nil)
+                return
+            }
+            
+            self?.displayWarningLabel(withText: "No such user")
+        }
     }
     
     @IBAction func registerTapped(_ sender: UIButton) {
+        guard let email = emailTextField.text, let password = passwordTextField.text, email != "", password != "" else {
+            displayWarningLabel(withText: "Info is incorrect")
+            return
+        }
+        
+        Auth.auth().createUser(withEmail: email, password: password) { user, error in
+            if error != nil {
+                if user != nil {
+                    
+                } else {
+                    
+                }
+            }
+        }
     }
 }
 
