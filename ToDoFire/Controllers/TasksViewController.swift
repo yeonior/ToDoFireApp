@@ -29,6 +29,29 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @IBAction func addTapped(_ sender: UIBarButtonItem) {
+        
+        let alertController = UIAlertController(title: "New task", message: "Add a new task", preferredStyle: .alert)
+        alertController.addTextField()
+        let save = UIAlertAction(title: "Save", style: .default) { _ in
+            guard let textField = alertController.textFields?.first, textField.text != "" else {
+                let alertControllerOfError = UIAlertController(title: "Error", message: "Please add something", preferredStyle: .alert)
+                let ok = UIAlertAction(title: "Ok", style: .default) { _ in
+                    self.present(alertController, animated: true)
+                }
+                alertControllerOfError.addAction(ok)
+                
+                return self.present(alertControllerOfError, animated: true)
+            }
+            
+            // ...
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .default)
+        
+        alertController.addAction(save)
+        alertController.addAction(cancel)
+        
+        present(alertController, animated: true)
     }
     
     @IBAction func signOutTapped(_ sender: UIBarButtonItem) {

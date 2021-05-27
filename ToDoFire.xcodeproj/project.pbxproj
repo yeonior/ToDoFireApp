@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -17,6 +17,8 @@
 		A231A2C226594A6600C6F867 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = A231A2C126594A6600C6F867 /* Assets.xcassets */; };
 		A231A2C526594A6600C6F867 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = A231A2C326594A6600C6F867 /* LaunchScreen.storyboard */; };
 		A231A2CD26594AC100C6F867 /* .gitignore in Resources */ = {isa = PBXBuildFile; fileRef = A231A2CC26594AC100C6F867 /* .gitignore */; };
+		A2AB61562660187B005D5DF3 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AB61552660187B005D5DF3 /* User.swift */; };
+		A2AB615826601883005D5DF3 /* Task.swift in Sources */ = {isa = PBXBuildFile; fileRef = A2AB615726601883005D5DF3 /* Task.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +35,8 @@
 		A231A2C426594A6600C6F867 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		A231A2C626594A6600C6F867 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		A231A2CC26594AC100C6F867 /* .gitignore */ = {isa = PBXFileReference; lastKnownFileType = text; path = .gitignore; sourceTree = "<group>"; };
+		A2AB61552660187B005D5DF3 /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		A2AB615726601883005D5DF3 /* Task.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Task.swift; sourceTree = "<group>"; };
 		E830D7F1636AF6745AE62E4C /* Pods-ToDoFire.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ToDoFire.release.xcconfig"; path = "Target Support Files/Pods-ToDoFire/Pods-ToDoFire.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -62,7 +66,6 @@
 				4F9D7BBDE5A476174BAAA613 /* Pods-ToDoFire.debug.xcconfig */,
 				E830D7F1636AF6745AE62E4C /* Pods-ToDoFire.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -110,11 +113,29 @@
 		A231A2B726594A6600C6F867 /* ToDoFire */ = {
 			isa = PBXGroup;
 			children = (
-				A231A2BE26594A6600C6F867 /* Main.storyboard */,
+				A2AB615926601889005D5DF3 /* Models */,
+				A2AB615A266018A0005D5DF3 /* Views */,
 				A22B1B9A2659634D00F756FC /* Controllers */,
 				A22B1B992659634200F756FC /* Supporting Files */,
 			);
 			path = ToDoFire;
+			sourceTree = "<group>";
+		};
+		A2AB615926601889005D5DF3 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				A2AB61552660187B005D5DF3 /* User.swift */,
+				A2AB615726601883005D5DF3 /* Task.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		A2AB615A266018A0005D5DF3 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				A231A2BE26594A6600C6F867 /* Main.storyboard */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -236,6 +257,8 @@
 				A231A2BD26594A6600C6F867 /* LoginViewController.swift in Sources */,
 				A22B1B98265962F400F756FC /* TasksViewController.swift in Sources */,
 				A231A2B926594A6600C6F867 /* AppDelegate.swift in Sources */,
+				A2AB61562660187B005D5DF3 /* User.swift in Sources */,
+				A2AB615826601883005D5DF3 /* Task.swift in Sources */,
 				A231A2BB26594A6600C6F867 /* SceneDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
