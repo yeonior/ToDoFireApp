@@ -83,6 +83,7 @@ class LoginViewController: UIViewController {
         }
         
         Auth.auth().signIn(withEmail: email, password: password) { [weak self] user, error in
+            
             if error != nil {
                 self?.displayWarningLabel(withText: "Error occurred")
             }

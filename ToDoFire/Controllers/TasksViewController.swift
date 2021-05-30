@@ -27,12 +27,32 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         ref = Database.database().reference(withPath: "users").child(user.uid).child("tasks")
     }
     
+    // fetching data
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        ref.observe(.value) { [weak self] snapshot in
+            var _tasks = Array<Task>()
+            for item in snapshot.children {
+                let task = Task(snapshot: item as! DataSnapshot)
+                _tasks.append(task)
+            }
+            
+            self?.tasks = _tasks
+            self?.tableView.reloadData()
+        }
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        3
+        return tasks.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
+        
+        let taskTitle = tasks[indexPath.row].title
+        cell.textLabel?.text = taskTitle
+        
         return cell
     }
     
@@ -53,8 +73,7 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
             
             let task = Task(title: textField.text!, userId: (self?.user.uid)!)
             let taskRef = self?.ref.child(task.title.lowercased())
-            taskRef?.setValue(task.convertToDict())
-            
+            taskRef?.setValue(task.convertToDict())            
         }
         
         let cancel = UIAlertAction(title: "Cancel", style: .default)
