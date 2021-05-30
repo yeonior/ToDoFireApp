@@ -11,6 +11,7 @@ import Firebase
 class LoginViewController: UIViewController {
     
     let segueIdentifier = "tasksSegue"
+    var ref: DatabaseReference!
 
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet weak var warningLabel: UILabel!
@@ -24,11 +25,14 @@ class LoginViewController: UIViewController {
         warningLabel.alpha = 0
         loginButton.layer.cornerRadius = 20
         
+        ref = Database.database().reference(withPath: "users")
+        
         // keyboard adjusting
         let notificationCenter = NotificationCenter.default
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillShowNotification, object: nil)
         notificationCenter.addObserver(self, selector: #selector(adjustForKeyboard), name: UIResponder.keyboardWillHideNotification, object: nil)
         
+        // authentication
         Auth.auth().addStateDidChangeListener { [weak self] auth, user in
             if user != nil {
                 self?.performSegue(withIdentifier: self!.segueIdentifier, sender: nil)
@@ -59,7 +63,7 @@ class LoginViewController: UIViewController {
         scrollView.scrollIndicatorInsets = scrollView.contentInset
     }
     
-    // MARK: - Authentification
+    // MARK: - Authentication
     
     func displayWarningLabel(withText text: String) {
         warningLabel.text = text
@@ -98,14 +102,15 @@ class LoginViewController: UIViewController {
             return
         }
         
-        Auth.auth().createUser(withEmail: email, password: password) { user, error in
-            if error != nil {
-                if user != nil {
-                    
-                } else {
-                    
-                }
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] user, error in
+           
+            guard user != nil, error == nil else {
+                print(error!.localizedDescription)
+                return
             }
+            
+            let userRef = self?.ref.child((user?.user.uid)!)
+            userRef?.setValue(["email": user?.user.email])
         }
     }
 }

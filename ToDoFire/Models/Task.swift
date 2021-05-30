@@ -27,5 +27,9 @@ struct Task {
         userId = snapshotValue["userId"] as! String
         ref = snapshot.ref
         completed = snapshotValue["completed"] as! Bool
-     }
+    }
+    
+    func convertToDict() -> Any {
+        return ["title": title, "userId": userId, "completed": completed]
+    }
 }
