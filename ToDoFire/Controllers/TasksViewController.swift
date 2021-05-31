@@ -27,7 +27,8 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         ref = Database.database().reference(withPath: "users").child(user.uid).child("tasks")
     }
     
-    // fetching data
+    // MARK: - Fetching data
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
@@ -43,6 +44,8 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         }
     }
     
+    // MARK: - Table view data source
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return tasks.count
     }
@@ -50,11 +53,41 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         
-        let taskTitle = tasks[indexPath.row].title
+        let task = tasks[indexPath.row]
+        let taskTitle = task.title
+        let taskStatus = task.completed
         cell.textLabel?.text = taskTitle
+        
+        toggleCompletion(of: cell, with: taskStatus)
         
         return cell
     }
+    
+    // MARK: - Removing data
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let task = tasks[indexPath.row]
+            task.ref?.removeValue()
+        }
+    }
+    
+    // MARK: - Completion marking
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard let cell = tableView.cellForRow(at: indexPath) else { return }
+        let task = tasks[indexPath.row]
+        let taskStatus = !task.completed
+        
+        toggleCompletion(of: cell, with: taskStatus)
+        task.ref?.updateChildValues(["completed" : taskStatus])
+    }
+    
+    func toggleCompletion(of cell: UITableViewCell, with taskStatus: Bool) {
+        cell.accessoryType = taskStatus ? .checkmark : .none
+    }
+    
+    // MARK: - Saving data
     
     @IBAction func addTapped(_ sender: UIBarButtonItem) {
         
@@ -83,6 +116,8 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
         
         present(alertController, animated: true)
     }
+    
+    // MARK: - Signing out
     
     @IBAction func signOutTapped(_ sender: UIBarButtonItem) {
         do {

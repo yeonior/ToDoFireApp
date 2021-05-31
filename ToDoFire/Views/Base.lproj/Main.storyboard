@@ -113,6 +113,7 @@
                                 </constraints>
                             </scrollView>
                         </subviews>
+                        <viewLayoutGuide key="safeArea" id="cpL-oF-O58"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="V2H-Ig-SxO" firstAttribute="trailing" secondItem="mnW-HS-1wx" secondAttribute="trailing" id="Nfp-la-gk9"/>
